@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          package="com.NelsonMDiaz.SPCLiaison">
+
+    <uses-sdk
+            android:minSdkVersion="1"
+            android:targetSdkVersion="19"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES"/>
+    <!-- External storage for caching. -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <!-- My Location -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <!-- Maps API needs OpenGL ES 2.0. -->
+    <uses-feature
+            android:glEsVersion="0x00020000"
+            android:required="true"/>
+    <application
+            android:icon="@drawable/ic_launcher"
+            android:label="@string/app_name"
+            android:hardwareAccelerated="true">
+        <meta-data android:name="com.google.android.maps.v2.API_KEY"
+                   android:value="AIzaSyBhj1RWXxNJKilkMImC7MYl90G5BHcoz8A"/>
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="4132500" />
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+        <activity
+                android:name=".AllstateCampusActivity"
+                android:label="@string/allstate_campus_label"/>
+        <activity
+                android:name=".ClearwaterCampusActivity"
+                android:label="@string/clearwater_campus_label"/>
+        <activity
+                android:name=".EpicenterCampusActivity"
+                android:label="@string/epicenter_campus_label"/>
+        <activity
+                android:name=".GibbsCampusActivity"
+                android:label="@string/gibbs_campus_label"/>
+        <activity
+                android:name=".HealthEducationCampusActivity"
+                android:label="@string/health_education_campus_label"/>
+        <activity
+                android:name=".SeminoleCampusActivity"
+                android:label="@string/seminole_campus_label"/>
+        <activity
+                android:name=".SPCDowntownActivity"
+                android:label="@string/spc_downtown_campus_label"/>
+        <activity
+                android:name=".SPCMidtownActivity"
+                android:label="@string/spc_midtown_campus_label"/>
+        <activity
+                android:name=".SPCVetTechCampusActivity"
+                android:label="@string/spc_vet_tech_campus_label"/>
+        <activity
+                android:name=".TarponSpringsCampusActivity"
+                android:label="@string/tarpon_springs_campus_label"/>
+    </application>
+</manifest>

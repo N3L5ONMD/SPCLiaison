@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">SPC Liaison</string>
+    <string name="get_directions_button">Get Directions</string>
+    <string name="allstate_campus_label">Allstate Center</string>
+    <string name="clearwater_campus_label">Clearwater Campus</string>
+    <string name="epicenter_campus_label">EpiCenter</string>
+    <string name="gibbs_campus_label">Gibbs Campus</string>
+    <string name="health_education_campus_label">Caruth Health Education Center</string>
+    <string name="seminole_campus_label">Seminole Campus</string>
+    <string name="spc_downtown_campus_label">SPC Downtown</string>
+    <string name="spc_midtown_campus_label">SPC Midtown</string>
+    <string name="spc_vet_tech_campus_label">SPC Veterinary Technology Center</string>
+    <string name="tarpon_springs_campus_label">Tarpon Springs</string>
+
+</resources>

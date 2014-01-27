@@ -4,12 +4,13 @@ package com.NelsonMDiaz.SPCLiaison;
  * Created by nelsonmd81 on 1/23/14.
  */
 
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 public class AllstateCampusActivity extends FragmentActivity
 {
@@ -48,7 +49,8 @@ public class AllstateCampusActivity extends FragmentActivity
 
     private void setUpMap()
     {
-        mMap.addMarker(new MarkerOptions().position(new LatLng(0, 0)).title("Marker"));
+        mMap.addMarker(new MarkerOptions().position(new LatLng(0, 0)).title("Marker").icon(BitmapDescriptorFactory.fromResource(R.drawable.pin)));
+
     }
 }
 

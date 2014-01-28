@@ -42,6 +42,7 @@ public class SPCMidtownActivity extends FragmentActivity
             if (mMap != null)
             {
                 setUpMap();
+                mMap.setMyLocationEnabled(true);
             }
         }
     }

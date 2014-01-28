@@ -20,6 +20,7 @@ public class GibbsCampusActivity extends FragmentActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.gibbs_campus);
+
     }
     @Override
     protected void onResume()
@@ -40,6 +41,8 @@ public class GibbsCampusActivity extends FragmentActivity
             if (mMap != null)
             {
                 setUpMap();
+                mMap.setMyLocationEnabled(true);
+
             }
         }
     }

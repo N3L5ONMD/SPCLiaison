@@ -43,6 +43,7 @@ public class ClearwaterCampusActivity extends FragmentActivity
             if (mMap != null)
             {
                 setUpMap();
+                mMap.setMyLocationEnabled(true);
             }
         }
     }

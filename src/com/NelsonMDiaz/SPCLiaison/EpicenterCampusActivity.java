@@ -41,6 +41,7 @@ public class EpicenterCampusActivity extends FragmentActivity
             if (mMap != null)
             {
                 setUpMap();
+                mMap.setMyLocationEnabled(true);
             }
         }
     }

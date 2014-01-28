@@ -25,7 +25,8 @@
                     android:padding="8dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/get_directions_button"/>
+                    android:text="@string/get_directions_button"
+                    android:onClick="getDirections"/>
         </LinearLayout>
     </RelativeLayout>
 </LinearLayout>

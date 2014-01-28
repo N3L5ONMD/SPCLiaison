@@ -3,8 +3,12 @@ package com.NelsonMDiaz.SPCLiaison;
 /**
  * Created by nelsonmd81 on 1/23/14.
  */
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.view.View;
+import android.widget.Button;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
@@ -20,6 +24,20 @@ public class GibbsCampusActivity extends FragmentActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.gibbs_campus);
+
+        // Button for 'Get Directions' provides users current location to destination via Google Maps app
+        Button getDirections = (Button) findViewById(R.id.get_directions_button);
+        getDirections.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                // Take user to Administration building on Gibbs campus
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://maps.google.com/maps?saddr=&daddr=27.777523, -82.729470"));
+                intent.setClassName("com.google.android.apps.maps", "com.google.android.maps.MapsActivity");
+                startActivity(intent);
+            }
+        });
 
     }
     @Override

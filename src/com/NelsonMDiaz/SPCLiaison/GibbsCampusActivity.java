@@ -1,8 +1,10 @@
 package com.NelsonMDiaz.SPCLiaison;
 
-/**
- * Created by nelsonmd81 on 1/23/14.
+/*
+ * Created by Nelson on 1/23/14.
  */
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -15,7 +17,7 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-public class GibbsCampusActivity extends FragmentActivity
+public class GibbsCampusActivity extends FragmentActivity implements View.OnClickListener, DialogInterface.OnClickListener
 {
     GoogleMap mMap;
 
@@ -27,19 +29,44 @@ public class GibbsCampusActivity extends FragmentActivity
 
         // Button for 'Get Directions' provides users current location to destination via Google Maps app
         Button getDirections = (Button) findViewById(R.id.get_directions_button);
-        getDirections.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View view)
-            {
-                // Take user to Administration building on Gibbs campus
-                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://maps.google.com/maps?saddr=&daddr=27.777523, -82.729470"));
-                intent.setClassName("com.google.android.apps.maps", "com.google.android.maps.MapsActivity");
-                startActivity(intent);
-            }
-        });
-
+        getDirections.setOnClickListener(this);
     }
+        @Override
+        public void onClick(View view)
+        {
+            AlertDialog popUp = new AlertDialog.Builder(this)
+                    .setMessage("You are about to leave SPC Liaison and open Google Maps.")
+                    .setIcon(R.drawable.ic_launcher)
+                    .setTitle("SPC Liaison")
+                    .setPositiveButton("OK", this)
+                    .setNegativeButton("Stay", this)
+                    .setCancelable(false)
+                    .create();
+
+            popUp.show();
+
+        }
+
+        @Override
+        public void onClick(DialogInterface dialog, int which)
+        {
+            switch (which)
+            {
+                case DialogInterface.BUTTON_POSITIVE:
+                    // Take user to Administration building on Gibbs campus
+                    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://maps.google.com/maps?saddr=&daddr=27.777523, -82.729470"));
+                    intent.setClassName("com.google.android.apps.maps", "com.google.android.maps.MapsActivity");
+                    startActivity(intent);
+                    break;
+                case DialogInterface.BUTTON_NEGATIVE:
+                    break;
+                default:
+                    // nothing
+                    break;
+
+            }
+        }
+
     @Override
     protected void onResume()
     {
@@ -75,4 +102,5 @@ public class GibbsCampusActivity extends FragmentActivity
         // 6
 
     }
+
 }

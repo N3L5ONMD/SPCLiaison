@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="com.NelsonMDiaz.SPCLiaison"
         android:versionCode="1"
-        android:versionName="0.1">
+        android:versionName="1">
 
     <uses-sdk
             android:minSdkVersion="1"
@@ -24,7 +24,7 @@
             android:label="@string/app_name"
             android:hardwareAccelerated="true">
         <meta-data android:name="com.google.android.maps.v2.API_KEY"
-                   android:value="AIzaSyBRBpd34GN6clY26bSGSXIQ44pohaBidf4"/>
+                   android:value="AIzaSyD8ClEZwXBjR46caUaVmq6y2IZwDl-Xub4"/>
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="4132500" />

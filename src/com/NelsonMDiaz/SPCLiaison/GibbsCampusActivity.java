@@ -59,6 +59,7 @@ public class GibbsCampusActivity extends FragmentActivity implements View.OnClic
                     startActivity(intent);
                     break;
                 case DialogInterface.BUTTON_NEGATIVE:
+                    // Dismiss Dialog window
                     break;
                 default:
                     // nothing
@@ -99,7 +100,18 @@ public class GibbsCampusActivity extends FragmentActivity implements View.OnClic
         mMap.addMarker(new MarkerOptions().position(new LatLng(27.777833, -82.731290)).title("LA").snippet("Language Arts").icon(BitmapDescriptorFactory.fromResource(R.drawable.pin)));
         mMap.addMarker(new MarkerOptions().position(new LatLng(27.778157, -82.731195)).title("BK").snippet("Book Store").icon(BitmapDescriptorFactory.fromResource(R.drawable.pin)));
         mMap.addMarker(new MarkerOptions().position(new LatLng(27.778380, -82.731460)).title("SS").snippet("Student Services").icon(BitmapDescriptorFactory.fromResource(R.drawable.pin)));
-        // 6
+
+        mMap.addMarker(new MarkerOptions().position(new LatLng(27.778596, -82.731557)).title("FS").snippet("Food Service").icon(BitmapDescriptorFactory.fromResource(R.drawable.pin)));
+        mMap.addMarker(new MarkerOptions().position(new LatLng(27.778825, -82.731713)).title("LI").snippet("Library").icon(BitmapDescriptorFactory.fromResource(R.drawable.pin)));
+        mMap.addMarker(new MarkerOptions().position(new LatLng(27.777983, -82.731790)).title("EI").snippet("Ethics Institute").icon(BitmapDescriptorFactory.fromResource(R.drawable.pin)));
+        mMap.addMarker(new MarkerOptions().position(new LatLng(27.777961, -82.732032)).title("HS").snippet("Humanities").icon(BitmapDescriptorFactory.fromResource(R.drawable.pin)));
+        mMap.addMarker(new MarkerOptions().position(new LatLng(27.777867, -82.731911)).title("SA").snippet("Social Arts").icon(BitmapDescriptorFactory.fromResource(R.drawable.pin)));
+
+        mMap.addMarker(new MarkerOptions().position(new LatLng(27.777854, -82.732388)).title("MR").snippet("MIRA").icon(BitmapDescriptorFactory.fromResource(R.drawable.pin)));
+        mMap.addMarker(new MarkerOptions().position(new LatLng(27.777781, -82.732550)).title("TE").snippet("Technical").icon(BitmapDescriptorFactory.fromResource(R.drawable.pin)));
+        mMap.addMarker(new MarkerOptions().position(new LatLng(27.778177, -82.733147)).title("SC - West").snippet("Natural Science").icon(BitmapDescriptorFactory.fromResource(R.drawable.pin)));
+        mMap.addMarker(new MarkerOptions().position(new LatLng(27.778384, -82.732517)).title("SC - North").snippet("Natural Science").icon(BitmapDescriptorFactory.fromResource(R.drawable.pin)));
+        mMap.addMarker(new MarkerOptions().position(new LatLng(27.779106, -82.732005)).title("GM").snippet("Gymnasium").icon(BitmapDescriptorFactory.fromResource(R.drawable.pin)));
 
     }
 

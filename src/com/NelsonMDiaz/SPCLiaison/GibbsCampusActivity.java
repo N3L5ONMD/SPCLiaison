@@ -27,7 +27,7 @@ public class GibbsCampusActivity extends FragmentActivity implements View.OnClic
         super.onCreate(savedInstanceState);
         setContentView(R.layout.gibbs_campus);
 
-        // Button for 'Get Directions' provides users current location to destination via Google Maps app
+        // Button for 'Driving Directions' provides users current location to destination via Google Maps app
         Button getDirections = (Button) findViewById(R.id.get_directions_button);
         getDirections.setOnClickListener(this);
     }

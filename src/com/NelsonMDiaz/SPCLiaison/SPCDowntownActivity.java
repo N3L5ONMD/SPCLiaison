@@ -3,15 +3,21 @@ package com.NelsonMDiaz.SPCLiaison;
 /**
  * Created by nelsonmd81 on 1/23/14.
  */
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.view.View;
+import android.widget.Button;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-public class SPCDowntownActivity extends FragmentActivity
+public class SPCDowntownActivity extends FragmentActivity implements View.OnClickListener, DialogInterface.OnClickListener
 {
     GoogleMap mMap;
 
@@ -20,7 +26,49 @@ public class SPCDowntownActivity extends FragmentActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.spc_downtown_campus);
+
+        // Button for 'Driving Directions' provides users current location to destination via Google Maps app
+        Button getDirections = (Button) findViewById(R.id.get_directions_button);
+        getDirections.setOnClickListener(this);
     }
+
+    @Override
+    public void onClick(View view)
+    {
+        AlertDialog popUp = new AlertDialog.Builder(this)
+                .setMessage("You are about to leave SPC Liaison and open Google Maps.")
+                .setIcon(R.drawable.ic_launcher)
+                .setTitle("SPC Liaison")
+                .setPositiveButton("OK", this)
+                .setNegativeButton("Stay", this)
+                .setCancelable(false)
+                .create();
+
+        popUp.show();
+
+    }
+
+    @Override
+    public void onClick(DialogInterface dialog, int which)
+    {
+        switch (which)
+        {
+            case DialogInterface.BUTTON_POSITIVE:
+                // Take user to Administration building on Gibbs campus
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://maps.google.com/maps?saddr=&daddr=27.773361, -82.636500"));
+                intent.setClassName("com.google.android.apps.maps", "com.google.android.maps.MapsActivity");
+                startActivity(intent);
+                break;
+            case DialogInterface.BUTTON_NEGATIVE:
+                // Dismiss Dialog window
+                break;
+            default:
+                // nothing
+                break;
+
+        }
+    }
+
     @Override
     protected void onResume()
     {
@@ -47,7 +95,7 @@ public class SPCDowntownActivity extends FragmentActivity
 
     private void setUpMap()
     {
-        mMap.addMarker(new MarkerOptions().position(new LatLng(0, 0)).title("Marker").icon(BitmapDescriptorFactory.fromResource(R.drawable.pin)));
+        mMap.addMarker(new MarkerOptions().position(new LatLng(27.773361, -82.636500)).title("Main Entrance").icon(BitmapDescriptorFactory.fromResource(R.drawable.pin)));
 
     }
 }

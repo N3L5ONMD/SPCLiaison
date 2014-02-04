@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.widget.Button;
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
@@ -20,7 +21,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 public class SeminoleCampusActivity extends FragmentActivity implements View.OnClickListener, DialogInterface.OnClickListener
 {
 
-    GoogleMap mMap;
+    private GoogleMap mMap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -96,7 +97,9 @@ public class SeminoleCampusActivity extends FragmentActivity implements View.OnC
 
     private void setUpMap()
     {
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(27.858641, -82.796469), 10));
         mMap.addMarker(new MarkerOptions().position(new LatLng(27.858641, -82.796469)).title("LI").snippet("Library").icon(BitmapDescriptorFactory.fromResource(R.drawable.pin)));
 
     }
+
 }

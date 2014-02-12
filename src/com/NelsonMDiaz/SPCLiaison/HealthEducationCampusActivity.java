@@ -7,37 +7,77 @@ package com.NelsonMDiaz.SPCLiaison;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.LocationSource;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-public class HealthEducationCampusActivity extends FragmentActivity implements View.OnClickListener, DialogInterface.OnClickListener {
+public class HealthEducationCampusActivity extends FragmentActivity
+        implements View.OnClickListener,
+        DialogInterface.OnClickListener,
+        LocationListener,
+        LocationSource
+{
     GoogleMap mMap;
 
+    // Stores the current instantiation of the location client in this object
+    private OnLocationChangedListener mListener;
+
+    // A request to connect to Location Services
+    private LocationManager locationManager;
+
+    LatLng ADMINISTRATION_HEALTH_EDUCATION = new LatLng(27.838509, -82.729822);
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.health_education_campus);
 
         // Button for 'Driving Directions' provides users current location to destination via Google Maps app
         Button getDirections = (Button) findViewById(R.id.get_directions_button);
         getDirections.setOnClickListener(this);
+
+        locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+
+        if(locationManager != null)
+        {
+            boolean gpsIsEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+            boolean networkIsEnabled = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+
+            if(gpsIsEnabled)
+            {
+                locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 100L, 1.5F, this);
+            }
+            else if(networkIsEnabled)
+            {
+                locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 100L, 1.5F, this);
+            }
+
+        }
+
+        setUpMapIfNeeded();
     }
 
     @Override
-    public void onClick(View view) {
+    public void onClick(View view)
+    {
         AlertDialog popUp = new AlertDialog.Builder(this)
                 .setMessage("You are about to leave SPC Liaison and open Google Maps.")
                 .setIcon(R.drawable.ic_launcher)
-                .setTitle("SPC Liaison")
+                .setTitle("SPC Liaison - BETA")
                 .setPositiveButton("OK", this)
                 .setNegativeButton("Stay", this)
                 .setCancelable(false)
@@ -48,8 +88,10 @@ public class HealthEducationCampusActivity extends FragmentActivity implements V
     }
 
     @Override
-    public void onClick(DialogInterface dialog, int which) {
-        switch (which) {
+    public void onClick(DialogInterface dialog, int which)
+    {
+        switch (which)
+        {
             case DialogInterface.BUTTON_POSITIVE:
                 // Take user to Administration building on Gibbs campus
                 Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://maps.google.com/maps?saddr=&daddr=27.838509, -82.729822"));
@@ -67,28 +109,89 @@ public class HealthEducationCampusActivity extends FragmentActivity implements V
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
-        setUpMapIfNeeded();
+    public void onPause()
+    {
+        if(locationManager != null)
+        {
+            locationManager.removeUpdates(this);
+        }
+
+        super.onPause();
     }
 
-    private void setUpMapIfNeeded() {
+    @Override
+    protected void onResume()
+    {
+        super.onResume();
+        setUpMapIfNeeded();
+
+        if(locationManager != null)
+        {
+            mMap.setMyLocationEnabled(true);
+        }
+        else
+        {
+            Toast.makeText(this, "Getting your location", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    private void setUpMapIfNeeded()
+    {
         // Do a null check to confirm that we have not already instantiated the map.
-        if (mMap == null) {
+        if (mMap == null)
+        {
             // try to obtain the map from the supportmapfragment.
             mMap = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map))
                     .getMap();
             // Check if we were successful in obtaining the map.
-            if (mMap != null) {
+            if (mMap != null)
+            {
                 setUpMap();
                 mMap.setMyLocationEnabled(true);
             }
+
+            // Register the LocationSource
+            mMap.setLocationSource(this);
         }
     }
 
-    private void setUpMap() {
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(27.838509, -82.729822), 10));
-        mMap.addMarker(new MarkerOptions().position(new LatLng(27.838509, -82.729822)).title("AD").snippet("Administration").icon(BitmapDescriptorFactory.fromResource(R.drawable.pin)));
+    private void setUpMap()
+    {
 
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(ADMINISTRATION_HEALTH_EDUCATION, 10));
+        mMap.addMarker(new MarkerOptions().position(ADMINISTRATION_HEALTH_EDUCATION).title("AD").snippet("Administration").icon(BitmapDescriptorFactory.fromResource(R.drawable.pin)));
     }
+
+    @Override
+    public void activate(LocationSource.OnLocationChangedListener listener)
+    {
+        mListener = listener;
+    }
+
+    @Override
+    public void deactivate()
+    {
+        mListener = null;
+    }
+
+    @Override
+    public void onLocationChanged(Location location)
+    {
+        if( mListener != null )
+        {
+            mListener.onLocationChanged( location );
+
+            //Move the camera to the user's location once it's available!
+            mMap.animateCamera(CameraUpdateFactory.newLatLng(new LatLng(location.getLatitude(), location.getLongitude())));
+        }
+    }
+
+    @Override
+    public void onProviderDisabled(String provider) { }
+
+    @Override
+    public void onProviderEnabled(String provider) { }
+
+    @Override
+    public void onStatusChanged(String provider, int status, Bundle extras) { }
 }

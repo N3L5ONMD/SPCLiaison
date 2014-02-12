@@ -59,11 +59,15 @@ public final class MainActivity extends ListActivity
 
         locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
 
-        if(locationManager == null)
+        if(locationManager != null)
         {
-            boolean gpsIsNotEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+            boolean gpsIsEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
 
-            if(gpsIsNotEnabled)
+            if(gpsIsEnabled)
+            {
+                // Do nothing
+            }
+            else
             {
                     //Show an error dialog that GPS is disabled.
                 final AlertDialog.Builder builder = new AlertDialog.Builder(this);

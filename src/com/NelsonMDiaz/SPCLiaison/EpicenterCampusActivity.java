@@ -10,6 +10,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -44,6 +45,10 @@ public class EpicenterCampusActivity extends FragmentActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.epicenter_campus);
+
+        // Button for 'Driving Directions' provides users current location to destination via Google Maps app
+        Button getDirections = (Button) findViewById(R.id.get_directions_button);
+        getDirections.setOnClickListener(this);
 
         locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
 

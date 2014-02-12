@@ -45,6 +45,7 @@ public class SeminoleCampusActivity extends FragmentActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.seminole_campus);
+
         // Button for 'Driving Directions' provides users current location to destination via Google Maps app
         Button getDirections = (Button) findViewById(R.id.get_directions_button);
         getDirections.setOnClickListener(this);
@@ -66,6 +67,19 @@ public class SeminoleCampusActivity extends FragmentActivity
             }
 
         }
+
+        AlertDialog popUp = new AlertDialog.Builder(this)
+                .setMessage("Welcome to the Seminole Campus, would you please provide some feedback as to how well" +
+                        " this app detects your location while inside? If you can provide a screenshot so I can see" +
+                        " the blue dot finding you that would be AWESOME, thanks!")
+                .setIcon(R.drawable.ic_launcher)
+                .setTitle("SPC Liaison - BETA")
+                .setNegativeButton("OK", this)
+                .setCancelable(false)
+                .create();
+
+        popUp.show();
+
 
         setUpMapIfNeeded();
     }

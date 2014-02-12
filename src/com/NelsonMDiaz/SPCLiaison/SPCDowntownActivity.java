@@ -44,6 +44,7 @@ public class SPCDowntownActivity extends FragmentActivity implements
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.spc_downtown_campus);
+
         // Button for 'Driving Directions' provides users current location to destination via Google Maps app
         Button getDirections = (Button) findViewById(R.id.get_directions_button);
         getDirections.setOnClickListener(this);

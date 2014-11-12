@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name"> SPC Liaison - BETA </string>
+    <string name="app_name"> SPC Liaison </string>
     <string name="get_directions_button"> Driving Directions </string>
     <string name="allstate_campus_label"> Allstate Center </string>
     <string name="clearwater_campus_label"> Clearwater Campus </string>
